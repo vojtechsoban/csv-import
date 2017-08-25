@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import App from '../App';
+import CsvImportPage from '../frontend/modules/csvimport/CsvImportPage'
 
 export default class Root extends Component {
 
@@ -11,7 +11,7 @@ export default class Root extends Component {
     const { store } = this.props;
     return (
       <Provider store={store}>
-        <App />
+        <CsvImportPage />
       </Provider>
     );
   }

@@ -6,7 +6,7 @@ const start = moment().valueOf();
 
 export const initialState = {
   csvImport: {
-
+    fileName: null
   }
 };
 
