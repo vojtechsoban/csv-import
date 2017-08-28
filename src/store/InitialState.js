@@ -1,12 +1,9 @@
-import moment from 'moment';
-
-// properties must match reducer names - see reducers/index.js
-
-const start = moment().valueOf();
+import {SELECT_FILE} from '../frontend/modules/csvimport/pageModeEnum';
 
 export const initialState = {
   csvImport: {
-    fileName: null
+    fileName: null,
+    mode: SELECT_FILE
   }
 };
 

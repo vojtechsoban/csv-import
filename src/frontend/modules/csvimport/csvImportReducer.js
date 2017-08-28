@@ -1,17 +1,32 @@
-import {CSV_FILES_CHANGED, CSV_REMOVE_FILE} from './csvImportActions';
-export default (state = null, action) => {
-  
-  const result = Object.assign({}, state);
-  
+import {CSV_FILES_CHANGED, CSV_FILES_CHANGED_ERROR, CSV_REMOVE_FILE, FILE_UPLOADING} from './csvImportActions';
+import {PREVIEW, SELECT_FILE, UPLOADING} from './pageModeEnum';
+
+export default (state = {}, action) => {
+
   switch (action.type) {
 
     case CSV_FILES_CHANGED:
-      result.fileName = action.files[0].name;
-      return result;
+      return Object.assign({}, state, {
+        data: action.data,
+        mode: PREVIEW
+      });
+
+    case FILE_UPLOADING:
+      return Object.assign({}, state, {
+        fileName: action.fileName,
+        mode: UPLOADING
+      });
+
+    case CSV_FILES_CHANGED_ERROR:
+      // TODO error handling
+      console.error(`Something went wrong: code=${action.error.code}: message=${action.error.message}`);
+      return state;
 
     case CSV_REMOVE_FILE:
-      result.fileName = null;
-      return result;
+      return Object.assign({}, state, {
+        fileName: null,
+        mode: SELECT_FILE
+      });
 
     default:
       return state;

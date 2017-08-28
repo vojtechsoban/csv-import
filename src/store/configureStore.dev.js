@@ -1,4 +1,5 @@
-import { createStore, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleWare from 'redux-thunk';
 import { persistState } from 'redux-devtools';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
@@ -11,6 +12,7 @@ const getDebugSessionKey = () => {
 };
 
 const enhancer = compose(
+  applyMiddleware(thunkMiddleWare),
   DevTools.instrument(),
   persistState(getDebugSessionKey())
 );
