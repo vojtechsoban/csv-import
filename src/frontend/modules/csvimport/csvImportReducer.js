@@ -18,9 +18,12 @@ export default (state = {}, action) => {
       });
 
     case CSV_FILES_CHANGED_ERROR:
-      // TODO error handling
       console.error(`Something went wrong: code=${action.error.code}: message=${action.error.message}`);
-      return state;
+      return Object.assign({}, state, {
+        error: action.error.message,
+        fileName: null,
+        mode: SELECT_FILE
+      });
 
     case CSV_REMOVE_FILE:
       return Object.assign({}, state, {

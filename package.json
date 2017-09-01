@@ -84,6 +84,7 @@
     "sass-loader": "^6.0.3",
     "semantic-ui-css": "^2.2.11",
     "semantic-ui-react": "^0.71.3",
-    "style-loader": "^0.16.1"
+    "style-loader": "^0.16.1",
+    "superagent": "^3.6.0"
   }
 }
