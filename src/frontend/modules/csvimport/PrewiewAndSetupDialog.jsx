@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Grid, Button, Container, Segment, Table} from 'semantic-ui-react'
+import {Grid, Button, Container, Segment, Table, Dropdown} from 'semantic-ui-react'
 
 // Optimized for Ceska sporitelna, csv import, cp-1250 charset:
 //
@@ -11,19 +11,24 @@ import {Grid, Button, Container, Segment, Table} from 'semantic-ui-react'
 // date of transaction
 
 const columns = new Set([0, 2, 3, 4]);
-const filterColumns = (item, index) => (columns.has(index));
+// const filterColumns = (item, index) => (columns.has(index));
+const filterColumns = (item, index) => true;
 
-const PreviewAndSetupDialog = ({data}) => (
-  <Segment>
+const PreviewAndSetupDialog = ({preview}) => (
+  <Segment className="horizontalOverflow">
     <Table>
       <Table.Header>
         <Table.Row>
-          {data[0].filter(filterColumns).map((header, index) => (
+          {preview[0].filter(filterColumns).map((header, index) => (
             <Table.HeaderCell key={index}>{header}</Table.HeaderCell>))}
+        </Table.Row>
+        <Table.Row>
+          {preview[0].filter(filterColumns).map((header, index) => (
+            <Table.HeaderCell key={index}><Dropdown placeholder='ahoj' selection options={[{text: 't1', value: 'v1'}, {text: 't2', value: 'v2'}]}/></Table.HeaderCell>))}
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.slice(1).map((row, index) => (
+        {preview.slice(1).map((row, index) => (
           <Table.Row key={index}>{row.filter(filterColumns).map((cell, index) => (
               <Table.Cell key={index}>
                 {cell}
@@ -43,6 +48,6 @@ PreviewAndSetupDialog.propTypes = {
 
 export default connect(
   ({csvImport}) => ({
-    data: csvImport.data
+    preview: csvImport.data.preview
   }),
 )(PreviewAndSetupDialog);

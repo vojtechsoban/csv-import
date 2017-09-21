@@ -9,7 +9,6 @@ const serverPort = 3001;
 
 const watcher = chokidar.watch(appDir);
 
-// const upload = multer({dest: `csv_tmp/`}); // multer configuration
 const upload = multer({ storage: multer.memoryStorage()});
 
 watcher.on('ready', () => {

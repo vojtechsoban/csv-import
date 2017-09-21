@@ -4,6 +4,7 @@
   "description": "Proof of concept of importing and processing CSV files",
   "scripts": {
     "start": "NODE_ENV=dev webpack-dev-server --config webpack.config.dev.js",
+    "start:server": "npm --prefix server start",
     "dist": "BABEL_ENV=prod webpack --config webpack.config.prod.js --progress -p",
     "lint": "eslint src",
     "test": "BABEL_ENV=test mocha ./src/**/*.spec.js ./test/**/*.spec.js --compilers js:babel-register --recursive --require ./test/setup.js",
