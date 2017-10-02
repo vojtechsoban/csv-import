@@ -9,7 +9,9 @@ export const getAvailableColumns = (availablColumns, assignedTypes = []) => {
 
 export const getAssignedColumnTypes = (assignedColumns) => (
   assignedColumns
+    ? assignedColumns
     .filter(({type}) => (!!type))
     .map(({type}) => (type))
+    : []
 );
 

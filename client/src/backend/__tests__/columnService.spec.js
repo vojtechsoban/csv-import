@@ -47,7 +47,5 @@ describe('Column service module', () => {
       const actual = getAssignedColumnTypes([{type: 'c1'}, {type: null}]);
       expect(actual).to.deep.equal(['c1']);
     });
-
   });
-
 });

@@ -16,11 +16,13 @@ const PreviewAndSetupDialog = ({preview, assignedColumns, changeColumnType}) => 
           {preview[0].map((header, index) => (
             <Table.HeaderCell key={index}>
               <Dropdown placeholder='Plese select ...'
-                        onChange={(event, {value}) => {if (value !== 'empty') changeColumnType(index, value);}}
+                        onChange={(event, {value}) => changeColumnType(index, value)}
                         options={assignedColumns[index].options}
                         selection
+                        basic
+                        selectOnBlur={false}
+                        text={assignedColumns[index].type}
                         value={assignedColumns[index].type}
-
               />
             </Table.HeaderCell>))}
         </Table.Row>
