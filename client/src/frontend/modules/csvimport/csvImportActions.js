@@ -4,6 +4,7 @@ export const CSV_FILES_CHANGED = 'CSV_FILES_CHANGED';
 export const CSV_FILES_CHANGED_ERROR = 'CSV_FILES_CHANGED_ERROR';
 export const CSV_REMOVE_FILE = 'CSV_REMOVE_FILE';
 export const FILE_UPLOADING = 'FILE_UPLOADING';
+export const COLUMN_CHANGE = 'COLUMN_CHANGE';
 
 export const filesChangedAction = files => {
   
@@ -23,3 +24,4 @@ export const filesChangedAction = files => {
 
 export const filesChangedErrorAction = error => ({type: CSV_FILES_CHANGED_ERROR, error});
 export const removeFileAction = fileName => ({type: CSV_REMOVE_FILE, fileName});
+export const columnChange = (columnIndex, columnType) => ({type: COLUMN_CHANGE, columnIndex, columnType});

@@ -1,4 +1,4 @@
-import Papa from 'papaparse';
+import Papa from 'babyparse';
 
 export const analyse = stringData => {
   return new Promise((resolve, reject) => {
@@ -6,19 +6,22 @@ export const analyse = stringData => {
       complete: (results) => {
         resolve(results.data);
       },
-      encoding: 'CP1250'
+      // encoding doesn't work for babyparse?
+      // encoding: 'CP1250'
     });
   }).then(data => {
     return {
       analysis: analyseData(data),
-      preview: data.slice(0, Math.min(5, data.length)),
+      preview: data.slice(0, Math.min(10, data.length)),
       columns: [
-        {name: 'amount', required: true},
-        {name: 'date', required: true},
-        {name: 'transaction', required: true},
-        {name: 'payeee', required: false},
-        {name: 'note', required: false},
-      ]
+        {type: 'amount', required: true},
+        {type: 'transactionDate', required: true},
+        {type: 'item', required: true},
+        {type: 'counterAccount', required: true},
+        {type: 'note', required: false},
+        {type: 'account', required: false},
+        {type: 'clearanceDate', required: false}
+      ],
     };
   });
 };
@@ -68,7 +71,7 @@ const mergeColumn = (prevType, newType) => {
 
 const mergeAnalysis = (prevAnalysis, newAnalysis) => {
   const max = Math.max(prevAnalysis.length, newAnalysis.length);
-  
+
   const result = [];
   for (let i = 0; i < max; i++) {
     result[i] = mergeColumn(prevAnalysis[i], newAnalysis[i]);

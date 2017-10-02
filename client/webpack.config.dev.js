@@ -92,7 +92,7 @@ module.exports = Object.assign({}, defaultConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
-      title: 'Mortgage calculator',
+      title: 'CSV import demo',
       template: 'src/index.hbs'
     }),
     new webpack.DefinePlugin({
