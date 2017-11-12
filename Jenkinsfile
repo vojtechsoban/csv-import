@@ -14,8 +14,7 @@ def getUserTriggerProperties() {
 
 node {
     stage('Checkout') {
-
-        BRANCH_NAME = BRANCH_NAME.replace(/^origin/, '')
+        BRANCH_NAME = BRANCH_NAME.replaceFirst(/^origin\//, '')
         echo "normalized branch name = ${BRANCH_NAME}"
         checkout([
                 $class                           : 'GitSCM',
