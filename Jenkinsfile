@@ -18,13 +18,13 @@ node {
         BRANCH_NAME.replace(/^origin/, '')
         echo "normalized branch name = ${BRANCH_NAME}"
         sh 'git branch'
-//        checkout([
-//                $class                           : 'GitSCM',
-//                branches                         : scm.branches,
-//                extensions                       : scm.extensions + [[$class: 'LocalBranch'], [$class: 'WipeWorkspace']],
-//                userRemoteConfigs                : [[credentialsId: 'sobik', url: 'git@github.com:vojtechsoban/csv-import.git']],
-//                doGenerateSubmoduleConfigurations: false
-//        ])
+        checkout([
+                $class                           : 'GitSCM',
+                branches                         : scm.branches,
+                extensions                       : scm.extensions + [[$class: 'LocalBranch'], [$class: 'WipeWorkspace']],
+                userRemoteConfigs                : [[credentialsId: 'sobik', url: 'git@github.com:vojtechsoban/csv-import.git']],
+                doGenerateSubmoduleConfigurations: false
+        ])
         sh "git checkout ${BRANCH_NAME}"
     }
     stage('Build info') {
