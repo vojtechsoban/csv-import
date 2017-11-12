@@ -40,7 +40,7 @@ node {
         sh 'node --version'
         sh 'yarn --version'
     }
-    if (DEPLOY_TO) {
+    if (binding.hasVariable('DEPLOY_TO')) {
         stage('Deploy') {
             def userProperties = getUserTriggerProperties()
             // Deploy can be made by human therefore user properties must exist
