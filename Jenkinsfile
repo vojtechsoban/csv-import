@@ -45,7 +45,7 @@ node {
             def userProperties = getUserTriggerProperties()
             // Deploy can be made by human therefore user properties must exist
             assert userProperties : "Missing UserIdCause. Not started by user?"
-            assert DEPLOY_TO != 'prod' || (DEPLOY_TO == 'prod' && BRANCH_NAME =='origin/master') || PROD_CONFIRM == 'yes'
+            assert DEPLOY_TO != 'prod' || (DEPLOY_TO == 'prod' && BRANCH_NAME =='master') || PROD_CONFIRM == 'yes'
             echo "Started deployment of branch ${BRANCH_NAME} to server ${DEPLOY_TO} by user ${userProperties.userId} (${userProperties.userName})"
         }
     } else {
