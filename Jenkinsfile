@@ -16,13 +16,14 @@ node {
     stage('Checkout') {
         BRANCH_NAME = BRANCH_NAME.replaceFirst(/^origin\//, '')
         echo "normalized branch name = ${BRANCH_NAME}"
-        checkout([
-                $class                           : 'GitSCM',
-                branches                         : scm.branches,
-                extensions                       : scm.extensions + [[$class: 'LocalBranch'], [$class: 'WipeWorkspace']],
-                userRemoteConfigs                : [[credentialsId: 'sobik', url: 'git@github.com:vojtechsoban/csv-import.git']],
-                doGenerateSubmoduleConfigurations: false
-        ])
+        checkout scm
+//        checkout([
+//                $class                           : 'GitSCM',
+//                branches                         : scm.branches,
+//                extensions                       : scm.extensions + [[$class: 'LocalBranch'], [$class: 'WipeWorkspace']],
+//                userRemoteConfigs                : [[credentialsId: 'sobik', url: 'git@github.com:vojtechsoban/csv-import.git']],
+//                doGenerateSubmoduleConfigurations: false
+//        ])
         sh 'git branch'
         sh "git checkout ${BRANCH_NAME}"
     }
