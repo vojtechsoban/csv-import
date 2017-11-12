@@ -5,7 +5,7 @@ def getUserTriggerProperties() {
     def userCause = currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)
     if (userCause != null) {
         // User cause [userName: 'user full name', userId: 'username', shortDescription: 'Started by user Vojta']
-//            println "User cause ${userCause.properties}"
+        // println "User cause ${userCause.properties}"
         return userCause.properties
     } else {
         return null
@@ -46,10 +46,12 @@ node {
             // Deploy can be made by human therefore user properties must exist
             assert userProperties : "Missing UserIdCause. Not started by user?"
             assert DEPLOY_TO != 'prod' || (DEPLOY_TO == 'prod' && BRANCH_NAME =='master') || PROD_CONFIRM == 'yes'
-            echo "Started deployment of branch ${BRANCH_NAME} to server ${DEPLOY_TO} by user ${userProperties.userId} (${userProperties.userName})"
+            echo "Started deployment of branch '${BRANCH_NAME}' to server '${DEPLOY_TO}' by user ${userProperties.userId} (${userProperties.userName})"
         }
+    } else if (BRANCH_NAME == 'develop') {
+        echo "Started automatic deployment of 'develop' to 'dev'"
     } else {
-        echo 'skipping deployment since DEPLOY_TO not defined'
+        echo "skipping deployment since DEPLOY_TO is not defined and branch ${BRANCH_NAME} is not develop"
     }
     stage('Finish') {
         echo "Done"
