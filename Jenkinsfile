@@ -15,9 +15,8 @@ def getUserTriggerProperties() {
 node {
     stage('Checkout') {
 
-        BRANCH_NAME.replace(/^origin/, '')
+        BRANCH_NAME = BRANCH_NAME.replace(/^origin/, '')
         echo "normalized branch name = ${BRANCH_NAME}"
-        sh 'git branch'
         checkout([
                 $class                           : 'GitSCM',
                 branches                         : scm.branches,
@@ -25,6 +24,7 @@ node {
                 userRemoteConfigs                : [[credentialsId: 'sobik', url: 'git@github.com:vojtechsoban/csv-import.git']],
                 doGenerateSubmoduleConfigurations: false
         ])
+        sh 'git branch'
         sh "git checkout ${BRANCH_NAME}"
     }
     stage('Build info') {
