@@ -20,7 +20,8 @@ node {
                 $class                           : 'GitSCM',
                 branches                         : scm.branches,
                 extensions                       : scm.extensions + [[$class: 'LocalBranch'], [$class: 'WipeWorkspace']],
-                userRemoteConfigs                : [[credentialsId: 'sobik', url: 'git@github.com:vojtechsoban/csv-import.git']],
+                // userRemoteConfigs                : [[credentialsId: 'sobik', url: 'git@github.com:vojtechsoban/csv-import.git']],
+                userRemoteConfigs                : [[url: 'file:///projects/csv-import']],
                 doGenerateSubmoduleConfigurations: false
         ])
         sh 'git branch'
