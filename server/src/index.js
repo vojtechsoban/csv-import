@@ -28,8 +28,9 @@ watcher.on('ready', () => {
 const app = express();
 app.use(cors());
 
-app.post('/csvimport', upload.single('file'), (res, req, next) => require('./app/index').default(res, req, next));
+app.post('/csvimport', upload.single('file'), (req, res, next) => require('./app/index').default(req, res, next));
 
+app.get('/terms-content', (req, res) => {res.send('<h1>ahoj</h1><div>ahoj</div><h2>svete</h2><div>svete</div>')})
 
 app.listen(serverPort, () => {
   console.log(`App listening on port ${serverPort}!`);
